@@ -1,4 +1,16 @@
 {
+    "categories": [
+      {
+        "key": "Escolas",
+        "name": "Escolas",
+        "type": "polygono"
+      },
+      {
+        "key": "Avenidas",
+        "name": "Avenidas",
+        "type": "polygono"
+      }
+    ],
     "api": [
         {
         "category": "Escolas",
