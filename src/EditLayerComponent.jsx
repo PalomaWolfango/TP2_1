@@ -36,7 +36,6 @@ export default class editLayerComponent extends Component {
 
     this._onChange();
   };
-
   _onCreated = (e) => {
     let type = e.layerType;
     let layer = e.layer;
@@ -52,7 +51,6 @@ export default class editLayerComponent extends Component {
 
     this._onChange();
   };
-
   _onDeleted = (e) => {
     let numDeleted = 0;
     e.layers.eachLayer((layer) => {
@@ -62,23 +60,18 @@ export default class editLayerComponent extends Component {
 
     this._onChange();
   };
-
   _onMounted = (drawControl) => {
     console.log("_onMounted", drawControl);
   };
-
   _onEditStart = (e) => {
     console.log("_onEditStart", e);
   };
-
   _onEditStop = (e) => {
     console.log("_onEditStop", e);
   };
-
   _onDeleteStart = (e) => {
     console.log("_onDeleteStart", e);
   };
-
   _onDeleteStop = (e) => {
     console.log("_onDeleteStop", e);
   };
@@ -99,19 +92,29 @@ export default class editLayerComponent extends Component {
       );
     });
 
-    
+    /*fetch("http://localhost:3004/categories/")
+      .then((response) => response.json())
+      .then((categoriesList) => {
+        this.setState({ categories: categoriesList });
+      });*/
+
   }
 
-  fetchBooks = async () => {
+  /*fetchCategories = async () => {
     await fetch("http://localhost:3004/categories/")
       .then((response) => response.json())
       .then((categoriesList) => {
         this.setState({ categories: categoriesList });
       });
-  }
+  }*/
+  
   
   render() {
-    
+
+    /*useEffect(() => {
+      this.fetchCategories();
+    }, []);*/
+
     const mapConfig = {
       lat: 41.69541155762141,
       lng: -8.846955635438464,
