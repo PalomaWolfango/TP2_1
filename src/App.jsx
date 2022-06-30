@@ -5,6 +5,8 @@ import EditLayerComponent from "./EditLayerComponent";
 import CategoriesMenuComponentCopy from "./CategoriesMenuComponent_copy";
 import FullscreenControl from "react-leaflet-fullscreen";
 import $ from "jquery";
+import EditControl2 from "./EditControl";
+import ApiCall from "./ApiCall";
 
 const App = () => {
   const mapConfig = {
@@ -20,7 +22,8 @@ const App = () => {
         <Map center={[mapConfig.lat, mapConfig.lng]} zoom={mapConfig.zoom}>
           <FullscreenControl position="topleft" />
           {/* <DrawTools /> */}
-          <EditLayerComponent />
+          <EditControl2 />
+          <ApiCall />
           <TileLayer
             attribution="Tiles &copy; Carto"
             // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"

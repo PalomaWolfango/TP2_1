@@ -18,10 +18,9 @@ L.Icon.Default.mergeOptions({
 
 //
 
-
 let polyline;
 
-export default class editLayerComponent extends Component {
+export default class EditControl2 extends Component {
 
   // see http://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html#l-draw-event for leaflet-draw events doc
   _onEdited = (e) => {
@@ -44,8 +43,6 @@ export default class editLayerComponent extends Component {
     }
     // Do whatever else you need to. (save to db; etc)
     console.log("Geojson", layer.toGeoJSON());
-
-    
     //console.log("coords", layer.getLatLngs());
 
     this._onChange();
@@ -74,113 +71,6 @@ export default class editLayerComponent extends Component {
   _onDeleteStop = (e) => {
     console.log("_onDeleteStop", e);
   };
-
-  constructor() {
-    super();
-    this.state = {
-      categories: []
-    };
-  }
-
-  componentDidMount() {
-    const mapConfig = {
-      lat: 41.69541155762141,
-      lng: -8.846955635438464,
-      zoom: 17,
-    };
-
-    $("#categories-menu").on("click", "input:checkbox", (e) => {
-      const $checkbox = $(e.target);
-      console.log(
-        "%s Checked: %s",
-        $checkbox.is(":checked") ? "Is" : "Not",
-        $checkbox.val()
-      );
-    });
-
-    // fetch("http://localhost:3004/categories/")
-    //   .then((response) => response.json())
-    //   .then((categoriesList) => {
-    //     this.setState({categories: categoriesList})
-    //   })
-    //   .catch(err => console.error(err));
-  }
-
-  /*fetchCategories = async () => {
-    await fetch("http://localhost:3004/categories/")
-      .then((response) => response.json())
-      .then((categoriesList) => {
-        this.setState({ categories: categoriesList });
-      });
-  }*/
-  
-  
-  render() {
-
-    const mapConfig = {
-      lat: 41.69541155762141,
-      lng: -8.846955635438464,
-      zoom: 17,
-    };
-
-    const addCategory = () => {
-      //const map = mapRef.current;
-
-      console.log("clicked!..............");
-    };
-
-    return (
-      
-      <>
-
-        <Map
-          center={[mapConfig.lat, mapConfig.lng]}
-          zoom={[mapConfig.zoom]}
-          zoomControl={false}
-        >
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-          />
-          <FeatureGroup
-            ref={(reactFGref) => {
-              this._onFeatureGroupReady(reactFGref);
-            }}
-          >
-            <EditControl
-              position="topright"
-              onEdited={this._onEdited}
-              onCreated={this._onCreated}
-              onDeleted={this._onDeleted}
-              onMounted={this._onMounted}
-              onEditStart={this._onEditStart}
-              onEditStop={this._onEditStop}
-              onDeleteStart={this._onDeleteStart}
-              onDeleteStop={this._onDeleteStop}
-              draw={{
-                rectangle: false,
-                circle: false,
-                circlemarker: false,
-              }}
-            />
-          </FeatureGroup>
-        </Map>
-
-        {/* <div id="categories-menu">
-          <ul>
-            <li className="btn-add-category" onClick={() => addCategory()}>
-              <button>Adicionar Categoria</button>
-            </li>
-            {this.state.categories.map((c, idx) => (
-              <li key={idx}>
-                <input type="checkbox" value={c.name} key={idx}></input> {c.name}
-              </li>
-            ))}
-          </ul>
-        </div> */}
-      </>
-    );
-  }
 
   _editableFG = null;
 
@@ -215,18 +105,63 @@ export default class editLayerComponent extends Component {
     const geojsonData = this._editableFG.leafletElement.toGeoJSON();
     onChange(geojsonData);
   };
+
+  componentDidMount() {
+    const mapConfig = {
+      lat: 41.69541155762141,
+      lng: -8.846955635438464,
+      zoom: 17,
+    };
+  }
+
+  render() {
+
+    const mapConfig = {
+      lat: 41.69541155762141,
+      lng: -8.846955635438464,
+      zoom: 17,
+    };
+
+    return (
+      <>
+        <Map
+          center={[mapConfig.lat, mapConfig.lng]}
+          zoom={[mapConfig.zoom]}
+          zoomControl={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+          />
+          <FeatureGroup
+            ref={(reactFGref) => {
+              this._onFeatureGroupReady(reactFGref);
+            }}
+          >
+            <EditControl
+              position="topright"
+              onEdited={this._onEdited}
+              onCreated={this._onCreated}
+              onDeleted={this._onDeleted}
+              onMounted={this._onMounted}
+              onEditStart={this._onEditStart}
+              onEditStop={this._onEditStop}
+              onDeleteStart={this._onDeleteStart}
+              onDeleteStop={this._onDeleteStop}
+              draw={{
+                rectangle: false,
+                circle: false,
+                circlemarker: false,
+              }}
+            />
+          </FeatureGroup>
+        </Map>
+      </>
+    );
+  }
+
 }
 
-function getCircleGeoJson() {
-  return {
-    type: "Feature",
-    properties: {},
-    geometry: {
-      type: "Point",
-      coordinates: [-8.848029, 41.697438],
-    },
-  };
-}
 
 var getPolygonGeoJson = async () => {
   return [
