@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2</title>
+
+    <!-- leaflet css  -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="lib/leaflet.draw.css">
+    <link rel="stylesheet" href="./css/style.css" />
+
+</head>
+
+<body>
+    <div class="loginPopup">
+        <div class="formPopup" id="popupForm">
+          <form action="/action_page.php" class="formContainer">
+            <label for="email">
+              <strong>Name</strong>
+            </label>
+            <input type="text" id="email" placeholder="Category Name" name="email" required>
+            <label for="psw">
+              <strong>Type</strong>
+            </label>
+            <select id="cars" name="cars">
+                <option value="Point">Marker</option>
+                <option value="LineString">Line</option>
+                <option value="Polygon">Polygon</option>
+            </select>
+            <button type="submit" class="btn" onclick="reloadPage()">Add Category</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+    </div>
+    <div id="map">
+        <div class="leaflet-control coordinate"></div>
+    </div>
+    <div id="categories-menu">
+        <ul>
+            <li className="btn-add-category">
+              <button onclick="openForm()">Adicionar Categoria</button>
+            </li>
+            <li>
+                <input type="checkbox" value="Avenidas"></input> Avenidas
+            </li>
+        </ul>
+    </div>
+    
+</body>
+
+</html>
+
+<!-- leaflet js  -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+
+<script src="./data/point.js"></script>
+<script src="./data/line.js"></script>
+<script src="./data/polygon.js"></script>
+
+<script src="./src/polygon.js"></script>
+<script src="./src/line.js"></script>
+<script src="./src/marker.js"></script>
+
+
+<script>
+
+    /*==============================================
+                ADD CATEGORY FORM
+    ================================================*/
+    function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+    }
+
+    function reloadPage() {
+        location.reload();
+    }
+
+    // Map initialization 
+    var map = L.map('map').setView([28.3949, 84.1240], 8);
+
+    /*==============================================
+                TILE LAYER
+    ================================================*/
+    //osm layer
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map);
+
+    /*==============================================
+                    LEAFLET DRAW
+    ================================================*/
+    var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+    var drawControl = new L.Control.Draw({
+		draw: {
+            rectangle: false,
+            circle: false,
+            circlemarker: false,
+		    polygon: {
+		        shapeOptions: {
+		            color: 'purple'
+		    },
+		        drawError: {
+		            color: 'orange',
+		        timeout: 1000
+		    },
+		    },
+		    polyline: {
+		        shapeOptions: {
+		        color: 'red'
+		     },
+		    },
+		    marker: true
+		   },
+         edit: {
+            featureGroup: drawnItems
+         }
+    });
+    map.addControl(drawControl);
+    map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+            drawnItems.addLayer(layer);
+    });
+
+    /*==============================================
+                        MARKER
+    ================================================*/
+    var myIcon = L.icon({
+        iconUrl: 'img/red_marker.png',
+        iconSize: [40, 40],
+    });
+    var singleMarker = L.marker([28.3949, 84.1240], { icon: myIcon, draggable: true });
+    var popup = singleMarker.bindPopup('This is the Nepal. ' + singleMarker.getLatLng()).openPopup()
+    popup.addTo(map);
+
+    var secondMarker = L.marker([29.3949, 83.1240], { icon: myIcon, draggable: true });
+    console.log(singleMarker.toGeoJSON())
+
+
+    /*==============================================
+                GEOJSON
+    ================================================*/
+    var pointData = L.geoJSON(pointJson).addTo(map)
+    var lineData = L.geoJSON(lineJson).addTo(map)
+    var polygonData = L.geoJSON(polygonJson, {
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup(`<b>Name: </b>` + feature.properties.category)
+        },
+        style: {
+            fillColor: 'red',
+            fillOpacity: 1,
+            color: '#c0c0c0',
+        }
+    }).addTo(map);
+
+
+
+    /*==============================================
+                    LAYER CONTROL
+    ================================================*/
+    var baseMaps = {
+        "OSM": osm
+    };
+
+    var overlayMaps = {
+        "First Marker": singleMarker,
+        'Second Marker': secondMarker,
+        'Point Data': pointData,
+        'Line Data': lineData,
+        'Polygon Data': polygonData
+    };
+    // map.removeLayer(singleMarker)
+
+    L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+
+
+    /*==============================================
+                    LEAFLET EVENTS
+    ================================================*/
+    map.on('mouseover', function () {
+        console.log('your mouse is over the map')
+    })
+
+    map.on('mousemove', function (e) {
+        document.getElementsByClassName('coordinate')[0].innerHTML = 'lat: ' + e.latlng.lat + 'lng: ' + e.latlng.lng;
+        console.log('lat: ' + e.latlng.lat, 'lng: ' + e.latlng.lng)
+    })
+
+
+    
+
+</script>
