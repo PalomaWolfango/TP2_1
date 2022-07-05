@@ -1,36 +1,61 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Map, TileLayer } from "react-leaflet";
-import EditLayerComponent from "./EditLayerComponent";
-// import CategoriesMenuComponent from "./CategoriesMenuComponent";
-import CategoriesMenuComponentCopy from "./CategoriesMenuComponent_copy";
 import FullscreenControl from "react-leaflet-fullscreen";
-import $ from "jquery";
-import EditControl2 from "./EditControl";
-import ApiCall from "./ApiCall";
+import Categories from "./components/Categories";
+import DrawTools from "./components/DrawTools";
+import AssociateCategoryDialog from "./components/AssociateCategoryDialog"
+import AddCategoryDialog from "./components/AddCategoryDialog"
 
 const App = () => {
+
   const mapConfig = {
     lat: 41.69541155762141,
     lng: -8.846955635438464,
-    zoom: 17
+    zoom: 17,
+    zoomControl: false
+  };
+
+  const [isAssociateCategoryOpen, setIsAssociateCategoryOpen] = useState(false);
+  const [isAddCategoryOpen, setIsAddCategoryOpen] = useState(false);
+
+  //const [refresh, doRefresh] = useState(0);
+
+  const handleAssociateCategoryOpen = () => {
+    setIsAssociateCategoryOpen(!isAssociateCategoryOpen);
+  };
+
+  const handleAddCategoryOpen = () => {
+    console.log("handleAddCategoryOpen");
+    setIsAddCategoryOpen(!isAddCategoryOpen);
   };
 
   return (
     <Fragment>
       {/* <GlobalStateProvider> */}
       <div id="map-wrapper">
-        <Map center={[mapConfig.lat, mapConfig.lng]} zoom={mapConfig.zoom}>
+        <Map center={[mapConfig.lat, mapConfig.lng]} zoom={mapConfig.zoom} zoomControl={[mapConfig.zoomControl]}>
           <FullscreenControl position="topleft" />
-          {/* <DrawTools /> */}
-          <EditControl2 />
-          <ApiCall />
+          <DrawTools />
+          <Categories 
+            handleAddCategoryOpen={isAssociateCategoryOpen}
+            handleCloseDialog={() => setIsAddCategoryOpen(false)}
+             />
           <TileLayer
-            attribution="Tiles &copy; Carto"
-            // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
-            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
         </Map>
       </div>
+      <AssociateCategoryDialog
+        isDialogOpened={isAddCategoryOpen}
+        handleCloseDialog={() => setIsAddCategoryOpen(false)}
+      />
+      <AddCategoryDialog
+        isDialogOpened={isAddCategoryOpen}
+        handleCloseDialog={() => setIsAddCategoryOpen(false)}
+      />
+      <button onClick={() => handleAssociateCategoryOpen()}>Open "Associate Category" Dialog</button>
+      <button onClick={() => handleAddCategoryOpen()}>Open "Add Category" Dialog</button>
       {/* </GlobalStateProvider> */}
     </Fragment>
   );

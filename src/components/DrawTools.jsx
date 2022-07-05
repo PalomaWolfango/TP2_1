@@ -11,6 +11,10 @@ import {
 import { EditControl } from "react-leaflet-draw";
 
 const DrawTools = () => {
+
+	const parentARef = React.useRef();
+	const handleChildBClick = () => parentARef.current.handleOpen();
+
 	const _onEdited = e => {
 		let numEdited = 0;
 		e.layers.eachLayer(layer => {
@@ -18,10 +22,15 @@ const DrawTools = () => {
 		});
 		console.log(`_onEdited: edited ${numEdited} layers`, e);
 
+		handleChildBClick();
+
 		// this._onChange();
 	};
 
 	const _onCreated = e => {
+
+		console.log('_onCreated triggered!');
+
 		let type = e.layerType;
 		let layer = e.layer;
 		if (type === "marker") {
@@ -34,6 +43,9 @@ const DrawTools = () => {
 		console.log("Geojson", layer.toGeoJSON());
 		console.log("coords", layer.getLatLngs());
 		// Do whatever else you need to. (save to db; etc)
+
+		//TODO: open dialog to associate category;
+
 
 		// this._onChange();
 	};
@@ -90,7 +102,7 @@ onEditVertex	function	hook to leaflet-draw's draw:editvertex event*/
 		<FeatureGroup>
 			<EditControl
 				onDrawStart={_onDrawStart}
-				position="topleft"
+				position="topright"
 				onEdited={_onEdited}
 				onCreated={_onCreated}
 				onDeleted={_onDeleted}
@@ -109,7 +121,7 @@ onEditVertex	function	hook to leaflet-draw's draw:editvertex event*/
 					rectangle: false,
 					circlemarker: false,
 					circle: false,
-					polygon: false
+					polygon: true
 				}}
 			/>
 		</FeatureGroup>
