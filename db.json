@@ -42,7 +42,10 @@
       "id": 1,
       "category": "Escolas",
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "name": "ESTG",
+        "popupContent": "Esta é a nossa escola! :)"
+    },
       "geometry": {
         "type": "Polygon",
         "coordinates": [

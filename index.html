@@ -81,13 +81,15 @@
         $('#categories').on('click', 'input:checkbox', (e) => {
             console.log($(e.target).val());
             let catName = '?category=none'
-            if ($(e.target).not(':checked')) {
-
-                /*if (map.hasLayer(oldmarker)) {
-                    map.removeLayer(oldmarker);
-                }*/
-
+            if ($(e.target).is(':checked')) {
                 catName = '?category=' + $(e.target).val();
+            }
+            else {
+                map.eachLayer(function(layer){
+                    if(layer?.feature?.category==$(e.target).val()) {
+                        map.removeLayer(layer);
+                    }
+                });
             }
             fetchCategoriesGeoJSON(catName);
         }).on('click', 'a', (e) => {
@@ -111,7 +113,9 @@
         fetch("http://localhost:3004/api/" + catName)
             .then((response) => response.json())
             .then((result) => geoJSONData = result)
-            .then((result) => L.geoJSON(geoJSONData).addTo(map))
+            .then((result) => L.geoJSON(geoJSONData, {
+                onEachFeature: onEachFeature
+            }).addTo(map))
             .catch(err => console.error(err));
     };
     const removeCategory = (catId) => {
@@ -281,6 +285,13 @@
 
         showAssociateCategoryDialog(type, layer.toGeoJSON());
     });
+
+    function onEachFeature(feature, layer) {
+        // does this feature have a property named popupContent?
+        if (feature.properties && feature.properties.popupContent) {
+            layer.bindPopup(feature.properties.popupContent);
+        }
+    }
 
     /*==============================================
                     LEAFLET EVENTS
