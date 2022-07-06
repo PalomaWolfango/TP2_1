@@ -4,19 +4,22 @@
       "id": 1,
       "key": "Escolas",
       "name": "Escolas",
-      "type": "polygon"
+      "type": "polygon",
+      "color": "#f00c4d"
     },
     {
       "id": 2,
       "key": "Avenidas",
       "name": "Avenidas",
-      "type": "polygon"
+      "type": "polygon",
+      "color": "#0cf019"
     },
     {
       "key": "Obras",
       "name": "Obras",
       "type": "polygon",
-      "id": 3
+      "id": 3,
+      "color": "#3388ff"
     }
   ],
   "api": [
@@ -26,7 +29,8 @@
       "type": "Feature",
       "properties": {
         "name": "ESTG",
-        "popupContent": "Esta é a nossa escola! :)"
+        "popupContent": "Esta é a nossa escola! :)",
+        "color": "#f00c4d"
       },
       "geometry": {
         "type": "Polygon",
@@ -76,7 +80,8 @@
       "id": 2,
       "category": "Escolas",
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "color": "#f00c4d"},
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -125,7 +130,7 @@
       "id": 3,
       "category": "Avenidas",
       "type": "Feature",
-      "properties": {},
+      "properties": {"color":"#0cf019"},
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -138,7 +143,7 @@
       "id": 4,
       "category": "Escolas",
       "type": "Feature",
-      "properties": {},
+      "properties": {"color": "#f00c4d"},
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -154,57 +159,59 @@
       }
     },
     {
-      "category": "Museus",
+      "category": "Obras",
       "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -8.846,
-          41.695723
-        ]
+      "properties": {
+        "color": "#3388ff"
       },
-      "id": 5
-    },
-    {
-      "category": "xyz",
-      "type": "Feature",
-      "properties": {},
       "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -8.845764,
-          41.696965
-        ]
-      },
-      "id": 6
-    },
-    {
-      "category": "Terrenos",
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "LineString",
+        "type": "Polygon",
         "coordinates": [
           [
-            -8.850335,
-            41.697117
-          ],
-          [
-            -8.850335,
-            41.697117
-          ],
-          [
-            -8.848747,
-            41.69343
-          ],
-          [
-            -8.848747,
-            41.69343
+            [
+              -8.847384,
+              41.697742
+            ],
+            [
+              -8.847384,
+              41.697742
+            ],
+            [
+              -8.845518,
+              41.697286
+            ],
+            [
+              -8.845518,
+              41.697286
+            ],
+            [
+              -8.846086,
+              41.696821
+            ],
+            [
+              -8.846086,
+              41.696821
+            ],
+            [
+              -8.847803,
+              41.696829
+            ],
+            [
+              -8.847803,
+              41.696829
+            ],
+            [
+              -8.847406,
+              41.69775
+            ],
+            [
+              -8.847384,
+              41.697742
+            ]
           ]
         ]
       },
-      "id": 7
+      "id": 8
     }
   ]
 }

@@ -26,34 +26,39 @@
         integrity="sha512-3ohtiPVQpf7DqYvqgqCwrRHkBL+pqYVrNCGG2DO5ztbSm6crATB1wKEYCIqHxxut4JLrF38gwERfOHLm5FTGAw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        
     <!-- UI Styles-->
     <!--link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/mint-choc/jquery-ui.min.css"
-        integrity="sha512-2R18P/CDqeof/9lBzO3tYfd46s04fXfnt4wGA4U3IXv0UKvDf/jmO5VuD9EJEGxO/PQ4Py9zmd1bv3nK+i5mgw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /-->
+    href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/mint-choc/jquery-ui.min.css"
+    integrity="sha512-2R18P/CDqeof/9lBzO3tYfd46s04fXfnt4wGA4U3IXv0UKvDf/jmO5VuD9EJEGxO/PQ4Py9zmd1bv3nK+i5mgw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /-->
     <!--link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.min.css"
-        integrity="sha512-ug/p2fTnYRx/TfVgL8ejTWolaq93X+48/FLS9fKf7AiazbxHkSEENdzWkOxbjJO/X1grUPt9ERfBt21iLh2dxg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /-->
+    href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.min.css"
+    integrity="sha512-ug/p2fTnYRx/TfVgL8ejTWolaq93X+48/FLS9fKf7AiazbxHkSEENdzWkOxbjJO/X1grUPt9ERfBt21iLh2dxg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /-->
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css"
-        integrity="sha512-+0Vhbu8sRUlg+R/NKgTv7ahM+szPDF10G6J5PcHb1tOrAaquZIUiKUV3TH16mi6fuH4NjvHqlok6ppBhR6Nxuw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css"
+    integrity="sha512-+0Vhbu8sRUlg+R/NKgTv7ahM+szPDF10G6J5PcHb1tOrAaquZIUiKUV3TH16mi6fuH4NjvHqlok6ppBhR6Nxuw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+                
+    <!-- SmallColorPicker-->
+    <link rel="stylesheet" type="text/css" href="lib/small-color-picker-build-v1/css/small-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/small-color-picker-build-v1/css/color-buttons.min.css">
+    <script src="lib/small-color-picker-build-v1/js/small-color-picker.min.js"></script>
 
 </head>
 
 <body>
 
-
-    <div id="dialog-add-category" title="Adicionar Categoria">
-        <input id="categoryName" placeholder="nome da categoria"></input>
+    <div id="dialog-add-category" title="Criar Categoria">
+        <div class="row"><input id="categoryName" placeholder="nome da categoria"></input>
         &nbsp;<select id="categoryType" placeholder="tipo da categoria">
             <option value="">Selecionar tipo:</option>
             <option value="polyline">Polyline</option>
             <option value="polygon">Polygon</option>
             <option value="marker">Mark</option>
-        </select>
+        </select></div>
+        <div class="row"><input id="categoryColor" /><div class="color-btn color-btn-square"><b style="background-color: #6acb59;"></b>selecione a cor</div></div>
     </div>
     <div id="dialog-associate-category" title="Associar Categoria">
         <br /><select id="categoryNameRel">
@@ -110,6 +115,43 @@
             removeCategory($(e.target).attr('id'));
         });
 
+        //SmallColorPicker Init
+        $(".color-btn").smallColorPicker({
+            placement: {
+                position: "absolute", // positioning (ignored in popup mode)
+                top: "0", // top posision (ignored in popup mode)
+                left: "0", // left position (ignored in popup mode)
+                parent: null, // don't pass this if you are using jQuery plugin version
+                popup: true // popup or static color picker verson
+            },
+            colors: {
+                colorOld: null, // old color (the one displayed on the left)
+                colorNew: "#ff0000" // new color (displayed on the right; currently selected color)
+            },
+            texts: { // texts used in color picker
+                ok: "OK",
+                cancel: "Cancelar",
+                switchModeToNum: "Show numbers",
+                switchModeToCol: "Show color wheel"
+            },
+            behavior: {
+                rotate: true, // whether to rotate color shades square
+                hideOnSelect: true, // auto hide picker on color select
+                mode: SmallColorPicker.Mode.COLOR, // default color selection mode 
+                switchMode: true, // whether the user can switch input mode
+                animation: true // show/hide fade animation 
+            }
+        }).on({
+            scp_ok: function(picker, color) { 
+                console.log('color: ', color);
+                $('#categoryColor').val(color);
+             }, // color is selected
+            scp_cancel: function(picker, color) {  }, // color selection cancelled
+            scp_show: function(picker) {  }, // picker is shown
+            scp_hide: function(picker) {  } // picker is hidden
+        });
+
+
     });
 
     let allCategories = [];
@@ -127,7 +169,10 @@
             .then((response) => response.json())
             .then((result) => geoJSONData = result)
             .then((result) => L.geoJSON(geoJSONData, {
-                onEachFeature: onEachFeature
+                onEachFeature: onEachFeature,
+                style: function (feature) {
+                    return {color: feature.properties.color};
+                }
             }).addTo(map))
             .catch(err => console.error(err));
     };
@@ -149,7 +194,7 @@
         $categories.find('li:not(.btn-add-category)').remove();
 
         allCategories.map((v, k) => {
-            $categories.append('<li> <a href="#" title="remover categoria: ' + v.name + '"><span id="' + v.id + '" class="ui-icon ui-icon-circle-close"></span></a> <input type="checkbox" value="' + v.name + '"></input> ' + v.name + '</li>');
+            $categories.append('<li> <a href="#" title="remover categoria: ' + v.name + '"><span id="' + v.id + '" class="ui-icon ui-icon-circle-close"></span></a> <input type="checkbox" value="' + v.name + '"></input> ' + v.name + '<div class="color-cat color-btn-square"><b style="background-color: ' + v.color + ';"></b></div></li>');
         });
     }
 
@@ -157,7 +202,7 @@
         $("#dialog-add-category").dialog({
             resizable: false,
             height: "auto",
-            width: 400,
+            width: 500,
             modal: true,
             close: function (event, ui) {
                 $('#categoryName').val("");
@@ -175,6 +220,7 @@
                             key: $('#categoryName').val().toLowerCase(),
                             name: $('#categoryName').val(),
                             type: $('#categoryType').val(),
+                            color: $('#categoryColor').val()
                         })
                     })
                         .then((response) => {
@@ -210,7 +256,7 @@
 
                 const $categoryNameRel = $dialog.find('#categoryNameRel')
                 allCategories.filter(f => f.type == _catType).map((v, k) => {
-                    $categoryNameRel.append('<option value="' + v.name + '">' + v.name + '</option>');
+                    $categoryNameRel.append('<option value="' + v.name + '" cat-color="' + v.color + '">' + v.name + '</option>');
                 });
             },
             buttons: {
@@ -219,10 +265,13 @@
                     const headers = new Headers();
                     headers.append("Content-Type", "application/json");
 
+                    let $categorySelected = $dialog.find('#categoryNameRel');
+                    let oGeoJSON = Object.assign({}, _geoJSON, {properties: {color: $dialog.find('#categoryNameRel option:selected').attr('cat-color')}});
+
                     fetch("http://localhost:3004/api/", {
                         headers: headers,
                         method: "POST",
-                        body: JSON.stringify({ category: $dialog.find('#categoryNameRel').val(), ..._geoJSON })
+                        body: JSON.stringify({ category: $categorySelected.val(), ...oGeoJSON })
                     })
                         .then((response) => {
                             $dialog.dialog("close");

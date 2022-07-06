@@ -57,8 +57,21 @@ li.btn-add-category {
 #dialog-add-category{
     z-index:9999;
     display: none;
+    padding: 22px;
 }
 #dialog-associate-category{
     z-index:9999;
     display: none;
+}
+.row {
+    padding-bottom: 10px;
+}
+.color-cat {
+    display: inline;
+    margin-left: 3px;
+    position: relative;
+    top: 4px;
+}
+#categoryColor {
+    display:none;
 }
