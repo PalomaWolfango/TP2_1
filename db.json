@@ -1,96 +1,198 @@
 {
-    "categories": [
-      {
-        "name": "Escolas",
-        "type": "Polygon"
-      },
-      {
-        "name": "Avenidas",
-        "type": "LineString"
-      },
-      {
-        "name": "Museus",
-        "type": "Point"
-      }
-    ],
-    "api": [
-        {
-        "category": "Escolas",
-        "type": "Feature",
-        "properties": {},
-        "geometry": {
-            "type": "Polygon",
-            "coordinates": [
-                [
-                    [
-                        -8.847332,
-                        41.695411
-                    ],
-                    [
-                        -8.847675,
-                        41.695091
-                    ],
-                    [
-                        -8.84774,
-                        41.693993
-                    ],
-                    [
-                        -8.847439,
-                        41.693865
-                    ],
-                    [
-                        -8.846442,
-                        41.693761
-                    ],
-                    [
-                        -8.846109,
-                        41.694033
-                    ],
-                    [
-                        -8.846045,
-                        41.69489
-                    ],
-                    [
-                        -8.846753,
-                        41.695427
-                    ],
-                    [
-                        -8.847332,
-                        41.695411
-                    ]
-                ]
-            ]
-        }
-      },
-      {
-        "category": "Avenidas",
-        "type": "Feature",
-        "properties": {},
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -8.847716,
-            41.697903
-          ]
-        }
-      },
-      {
-        "category": "Escolas",
-        "type": "Feature",
-        "properties": {},
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                [
-                    -8.846281,
-                    41.6963
-                ],
-                [
-                    -8.844039,
-                    41.695331
-                ]
-            ]
-        }
+  "categories": [
+    {
+      "id": 1,
+      "key": "Escolas",
+      "name": "Escolas",
+      "type": "polygon"
+    },
+    {
+      "id": 2,
+      "key": "Avenidas",
+      "name": "Avenidas",
+      "type": "polygon"
+    },
+    {
+      "key": "Obras",
+      "name": "Obras",
+      "type": "polygon",
+      "id": 3
+    },
+    {
+      "key": "museus",
+      "name": "Museus",
+      "type": "marker",
+      "id": 4
+    },
+    {
+      "key": "postes",
+      "name": "postes",
+      "type": "polyline",
+      "id": 6
+    },
+    {
+      "key": "placas",
+      "name": "placas",
+      "type": "polygon",
+      "id": 7
     }
-    ]
+  ],
+  "api": [
+    {
+      "id": 1,
+      "category": "Escolas",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -8.847332,
+              41.695411
+            ],
+            [
+              -8.847675,
+              41.695091
+            ],
+            [
+              -8.84774,
+              41.693993
+            ],
+            [
+              -8.847439,
+              41.693865
+            ],
+            [
+              -8.846442,
+              41.693761
+            ],
+            [
+              -8.846109,
+              41.694033
+            ],
+            [
+              -8.846045,
+              41.69489
+            ],
+            [
+              -8.846753,
+              41.695427
+            ],
+            [
+              -8.847332,
+              41.695411
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "category": "Escolas",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -8.844916,
+              41.694819
+            ],
+            [
+              -8.844444,
+              41.695059
+            ],
+            [
+              -8.843971,
+              41.694587
+            ],
+            [
+              -8.843971,
+              41.694411
+            ],
+            [
+              -8.843843,
+              41.694291
+            ],
+            [
+              -8.843832,
+              41.694058
+            ],
+            [
+              -8.844197,
+              41.693994
+            ],
+            [
+              -8.844755,
+              41.694323
+            ],
+            [
+              -8.844916,
+              41.694819
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "category": "Avenidas",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.847716,
+          41.697903
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "category": "Escolas",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -8.846281,
+            41.6963
+          ],
+          [
+            -8.844039,
+            41.695331
+          ]
+        ]
+      }
+    },
+    {
+      "category": "Museus",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.846,
+          41.695723
+        ]
+      },
+      "id": 5
+    },
+    {
+      "category": "xyz",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.845764,
+          41.696965
+        ]
+      },
+      "id": 6
+    }
+  ]
 }

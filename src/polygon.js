@@ -1,7 +1,7 @@
 /*==============================================
                     POLYGON
 ================================================*/
-var polygonData = L.geoJSON(polygonJson, {
+/*var polygonData = L.geoJSON(polygonJson, {
     onEachFeature: function (feature, layer) {
         layer.bindPopup(`<b>Name: </b>` + feature.properties.category)
     },
@@ -10,4 +10,4 @@ var polygonData = L.geoJSON(polygonJson, {
         fillOpacity: 1,
         color: '#c0c0c0',
     }
-}).addTo(map);
+}).addTo(map);*/

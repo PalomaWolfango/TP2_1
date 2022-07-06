@@ -1,7 +1,7 @@
     /*==============================================
                         MARKER
     ================================================*/
-    var myIcon = L.icon({
+    /*var myIcon = L.icon({
         iconUrl: 'img/red_marker.png',
         iconSize: [40, 40],
     });
@@ -11,4 +11,4 @@
     popup.addTo(map);
 
     var secondMarker = L.marker([29.3949, 83.1240], { icon: myIcon, draggable: true });
-    console.log(singleMarker.toGeoJSON())
+    console.log(singleMarker.toGeoJSON())*/

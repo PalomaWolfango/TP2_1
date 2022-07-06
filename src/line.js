@@ -1,4 +1,4 @@
 /*==============================================
                 LINE
 ================================================*/
-var lineData = L.geoJSON(lineJson).addTo(map)
+//var lineData = L.geoJSON(lineJson).addTo(map)
