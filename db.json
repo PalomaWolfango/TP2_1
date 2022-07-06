@@ -81,7 +81,8 @@
       "category": "Escolas",
       "type": "Feature",
       "properties": {
-        "color": "#f00c4d"},
+        "color": "#f00c4d"
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -130,7 +131,9 @@
       "id": 3,
       "category": "Avenidas",
       "type": "Feature",
-      "properties": {"color":"#0cf019"},
+      "properties": {
+        "color": "#0cf019"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -143,7 +146,9 @@
       "id": 4,
       "category": "Escolas",
       "type": "Feature",
-      "properties": {"color": "#f00c4d"},
+      "properties": {
+        "color": "#f00c4d"
+      },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -212,6 +217,85 @@
         ]
       },
       "id": 8
+    },
+    {
+      "category": "Obras",
+      "type": "Feature",
+      "properties": {
+        "color": "#3388ff"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -8.848033,
+              41.693518
+            ],
+            [
+              -8.848033,
+              41.693518
+            ],
+            [
+              -8.847829,
+              41.693454
+            ],
+            [
+              -8.847829,
+              41.693454
+            ],
+            [
+              -8.847706,
+              41.69337
+            ],
+            [
+              -8.847706,
+              41.69337
+            ],
+            [
+              -8.847711,
+              41.693293
+            ],
+            [
+              -8.847711,
+              41.693293
+            ],
+            [
+              -8.847802,
+              41.693245
+            ],
+            [
+              -8.847802,
+              41.693245
+            ],
+            [
+              -8.847985,
+              41.693334
+            ],
+            [
+              -8.847985,
+              41.693334
+            ],
+            [
+              -8.848108,
+              41.693438
+            ],
+            [
+              -8.848108,
+              41.693438
+            ],
+            [
+              -8.848038,
+              41.693514
+            ],
+            [
+              -8.848033,
+              41.693518
+            ]
+          ]
+        ]
+      },
+      "id": 9
     }
   ]
 }
