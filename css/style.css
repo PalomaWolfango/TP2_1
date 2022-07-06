@@ -50,8 +50,8 @@ body {
 }
 
 li.btn-add-category {
-    padding-top: 1px;
-    padding-bottom: 22px;
+    padding-bottom: 20px;
+    margin: -7px;
 }
 
 #dialog-add-category{
