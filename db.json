@@ -17,24 +17,6 @@
       "name": "Obras",
       "type": "polygon",
       "id": 3
-    },
-    {
-      "key": "museus",
-      "name": "Museus",
-      "type": "marker",
-      "id": 4
-    },
-    {
-      "key": "postes",
-      "name": "postes",
-      "type": "polyline",
-      "id": 6
-    },
-    {
-      "key": "placas",
-      "name": "placas",
-      "type": "polygon",
-      "id": 7
     }
   ],
   "api": [
