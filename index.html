@@ -25,9 +25,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/theme.min.css"
         integrity="sha512-3ohtiPVQpf7DqYvqgqCwrRHkBL+pqYVrNCGG2DO5ztbSm6crATB1wKEYCIqHxxut4JLrF38gwERfOHLm5FTGAw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"
+
+    <!-- UI Styles-->
+    <!--link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/mint-choc/jquery-ui.min.css"
         integrity="sha512-2R18P/CDqeof/9lBzO3tYfd46s04fXfnt4wGA4U3IXv0UKvDf/jmO5VuD9EJEGxO/PQ4Py9zmd1bv3nK+i5mgw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /-->
+    <!--link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.min.css"
+        integrity="sha512-ug/p2fTnYRx/TfVgL8ejTWolaq93X+48/FLS9fKf7AiazbxHkSEENdzWkOxbjJO/X1grUPt9ERfBt21iLh2dxg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css"
+        integrity="sha512-+0Vhbu8sRUlg+R/NKgTv7ahM+szPDF10G6J5PcHb1tOrAaquZIUiKUV3TH16mi6fuH4NjvHqlok6ppBhR6Nxuw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
@@ -85,8 +95,8 @@
                 catName = '?category=' + $(e.target).val();
             }
             else {
-                map.eachLayer(function(layer){
-                    if(layer?.feature?.category==$(e.target).val()) {
+                map.eachLayer(function (layer) {
+                    if (layer?.feature?.category == $(e.target).val()) {
                         map.removeLayer(layer);
                     }
                 });
@@ -121,7 +131,7 @@
     const removeCategory = (catId) => {
         const headers = new Headers();
         headers.append("Content-Type", "application/json");
-        fetch("http://localhost:3004/categories/"+catId, {
+        fetch("http://localhost:3004/categories/" + catId, {
             headers: headers,
             method: "DELETE"
         })
@@ -136,7 +146,7 @@
         $categories.find('li:not(.btn-add-category)').remove();
 
         allCategories.map((v, k) => {
-            $categories.append('<li><input type="checkbox" value="' + v.name + '"></input> ' + v.name + ' (<a id="' + v.id + '" href="#">X</a>)</li>');
+            $categories.append('<li> <a id="' + v.id + '" href="#" title="remover categoria: ' + v.name + '"><span class="ui-icon ui-icon-circle-close"></span></a> <input type="checkbox" value="' + v.name + '"></input> ' + v.name + '</li>');
         });
     }
 
