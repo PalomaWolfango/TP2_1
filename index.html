@@ -149,7 +149,7 @@
         $categories.find('li:not(.btn-add-category)').remove();
 
         allCategories.map((v, k) => {
-            $categories.append('<li> <a id="' + v.id + '" href="#" title="remover categoria: ' + v.name + '"><span class="ui-icon ui-icon-circle-close"></span></a> <input type="checkbox" value="' + v.name + '"></input> ' + v.name + '</li>');
+            $categories.append('<li> <a href="#" title="remover categoria: ' + v.name + '"><span id="' + v.id + '" class="ui-icon ui-icon-circle-close"></span></a> <input type="checkbox" value="' + v.name + '"></input> ' + v.name + '</li>');
         });
     }
 

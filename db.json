@@ -45,7 +45,7 @@
       "properties": {
         "name": "ESTG",
         "popupContent": "Esta é a nossa escola! :)"
-    },
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -196,6 +196,33 @@
         ]
       },
       "id": 6
+    },
+    {
+      "category": "Terrenos",
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -8.850335,
+            41.697117
+          ],
+          [
+            -8.850335,
+            41.697117
+          ],
+          [
+            -8.848747,
+            41.69343
+          ],
+          [
+            -8.848747,
+            41.69343
+          ]
+        ]
+      },
+      "id": 7
     }
   ]
 }
